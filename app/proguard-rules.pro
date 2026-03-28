@@ -5,3 +5,5 @@
 -keepclassmembers class com.thekami.kamitv.** { *** Companion; }
 -dontwarn kotlinx.coroutines.**
 -keep class com.google.zxing.** { *; }
+-dontwarn org.slf4j.**
+-keep class org.slf4j.** { *; }
