@@ -1,0 +1,7 @@
+-keep class io.ktor.** { *; }
+-dontwarn io.ktor.**
+-keepattributes *Annotation*, InnerClasses
+-keep,includedescriptorclasses class com.thekami.kamitv.**$$serializer { *; }
+-keepclassmembers class com.thekami.kamitv.** { *** Companion; }
+-dontwarn kotlinx.coroutines.**
+-keep class com.google.zxing.** { *; }
