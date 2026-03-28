@@ -3,6 +3,7 @@ package com.thekami.kamitv.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.thekami.kamitv.server.CommandDispatcher
 import com.thekami.kamitv.server.ServerEvent
 import com.thekami.kamitv.server.WebSocketServer
 import kotlinx.coroutines.flow.*
@@ -46,6 +47,10 @@ class HomeViewModel(private val server: WebSocketServer) : ViewModel() {
     }
 
     private fun handleCommand(event: ServerEvent.CommandReceived) {
+        // Dispatch to system (accessibility, volume, etc.)
+        CommandDispatcher.dispatch(event.type, event.payload)
+
+        // Update UI state
         when (event.type) {
             "key" -> {
                 val key = event.payload["key"]?.jsonPrimitive?.contentOrNull ?: return
@@ -56,7 +61,7 @@ class HomeViewModel(private val server: WebSocketServer) : ViewModel() {
                 _uiState.update { it.copy(typedText = it.typedText + text, currentTab = Tab.KEYBOARD) }
             }
             "backspace" -> _uiState.update { it.copy(typedText = it.typedText.dropLast(1)) }
-            "clear"     -> _uiState.update { it.copy(typedText = "") }
+            "clear" -> _uiState.update { it.copy(typedText = "") }
         }
     }
 
