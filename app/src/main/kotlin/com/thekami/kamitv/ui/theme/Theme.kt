@@ -10,14 +10,12 @@ import androidx.tv.material3.darkColorScheme
 fun KamiTVTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = darkColorScheme(
-            background     = Background,
-            surface        = Surface,
-            surfaceVariant = SurfaceVariant,
-            primary        = Primary,
-            onBackground   = OnBackground,
-            onSurface      = OnSurface,
-            onPrimary      = Background,
-            outline        = Outline,
+            background    = Background,
+            surface       = Surface,
+            primary       = Primary,
+            onBackground  = OnBackground,
+            onSurface     = OnSurface,
+            onPrimary     = Background,
         ),
         content = content,
     )

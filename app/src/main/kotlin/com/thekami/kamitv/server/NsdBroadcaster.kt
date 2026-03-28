@@ -16,9 +16,9 @@ class NsdBroadcaster(context: Context) {
             setPort(port)
         }
         listener = object : NsdManager.RegistrationListener {
-            override fun onRegistrationFailed(i: NsdServiceInfo, e: Int) = Log.e("NSD", "Failed: $e")
+            override fun onRegistrationFailed(i: NsdServiceInfo, e: Int) { Log.e("NSD", "Failed: $e") }
             override fun onUnregistrationFailed(i: NsdServiceInfo, e: Int) {}
-            override fun onServiceRegistered(i: NsdServiceInfo) = Log.i("NSD", "Registered: ${i.serviceName}")
+            override fun onServiceRegistered(i: NsdServiceInfo) { Log.i("NSD", "Registered: ${i.serviceName}") }
             override fun onServiceUnregistered(i: NsdServiceInfo) {}
         }
         nsdManager.registerService(info, NsdManager.PROTOCOL_DNS_SD, listener)

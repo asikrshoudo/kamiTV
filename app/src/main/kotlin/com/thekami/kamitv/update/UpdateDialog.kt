@@ -4,8 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
@@ -84,7 +84,11 @@ fun UpdateDialog(
                     is UpdateState.Downloading -> {
                         Text("⬇  Downloading Update…",
                             fontSize = 22.sp, fontWeight = FontWeight.Bold, color = OnBackground)
-                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                        LinearProgressIndicator(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = Primary,
+                            trackColor = SurfaceVariant,
+                        )
                         Text("Please wait, do not turn off the TV.",
                             fontSize = 14.sp, color = OnSurfaceDim)
                     }

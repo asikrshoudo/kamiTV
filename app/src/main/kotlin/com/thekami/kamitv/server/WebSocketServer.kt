@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.*
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.time.Duration.Companion.seconds
 
 private const val TAG = "WebSocketServer"
 
@@ -35,8 +34,8 @@ class WebSocketServer(val port: Int = 8765) {
         if (engine != null) return
         engine = embeddedServer(CIO, port = port) {
             install(WebSockets) {
-                pingPeriod = 20.seconds
-                timeout = 40.seconds
+                pingPeriodMillis = 20_000L
+                timeoutMillis = 40_000L
                 maxFrameSize = 50 * 1024 * 1024L
                 masking = false
             }

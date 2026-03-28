@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,26 +33,18 @@ fun PairingScreen(
         viewModel.onClientConnected.collect { onConnected(it) }
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize().background(Background),
-    ) {
+    Box(modifier = Modifier.fillMaxSize().background(Background)) {
         Row(
             modifier = Modifier.fillMaxSize().padding(horizontal = 72.dp, vertical = 48.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            // Left
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(28.dp),
-            ) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(28.dp)) {
                 Text("kamiTV", fontSize = 48.sp, fontWeight = FontWeight.Bold, color = OnBackground)
-
                 Text(
                     "Open kami-remote on your phone and scan\nthe QR code — or enter the PIN manually.",
                     fontSize = 17.sp, color = OnSurfaceDim, lineHeight = 26.sp,
                 )
-
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     SectionLabel("PIN CODE")
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -72,7 +65,6 @@ fun PairingScreen(
                         Text("Generate new PIN", fontSize = 14.sp, fontWeight = FontWeight.Medium)
                     }
                 }
-
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     SectionLabel("TV ADDRESS")
                     Text(
@@ -80,7 +72,6 @@ fun PairingScreen(
                         fontSize = 16.sp, color = OnSurface, fontFamily = FontFamily.Monospace,
                     )
                 }
-
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -97,7 +88,6 @@ fun PairingScreen(
                 }
             }
 
-            // Right — QR
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(14.dp),
@@ -118,7 +108,7 @@ fun PairingScreen(
                         .background(Surface),
                     contentAlignment = Alignment.Center,
                 ) {
-                    CircularProgressIndicator(modifier = Modifier.size(36.dp))
+                    CircularProgressIndicator(modifier = Modifier.size(36.dp), color = Primary)
                 }
                 Text("Scan with kami-remote", fontSize = 13.sp, color = OnSurfaceDim)
             }
