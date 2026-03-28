@@ -12,8 +12,6 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
-        android:banner="@mipmap/ic_launcher"
         android:label="kamiTV"
         android:theme="@style/Theme.KamiTV">
 
