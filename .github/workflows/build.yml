@@ -22,6 +22,8 @@ jobs:
 
       - run: yes | sdkmanager --licenses || true
 
+      - run: gradle wrapper --gradle-version 8.6
+
       - run: chmod +x gradlew
 
       - run: ./gradlew assembleRelease --no-daemon
