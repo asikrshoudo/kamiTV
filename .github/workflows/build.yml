@@ -31,7 +31,16 @@ jobs:
 
       - run: ./gradlew assembleRelease --no-daemon
 
-      - run: mv app/build/outputs/apk/release/app-release-unsigned.apk kamiTV-${GITHUB_REF_NAME}.apk
+      - name: Sign APK
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > kamitv.jks
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore kamitv.jks \
+            -storepass ${{ secrets.KEY_PASSWORD }} \
+            -keypass ${{ secrets.KEY_PASSWORD }} \
+            app/build/outputs/apk/release/app-release-unsigned.apk \
+            ${{ secrets.KEY_ALIAS }}
+          mv app/build/outputs/apk/release/app-release-unsigned.apk kamiTV-${GITHUB_REF_NAME}.apk
 
       - uses: softprops/action-gh-release@v2
         with:
