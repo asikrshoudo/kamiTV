@@ -29,7 +29,11 @@ jobs:
 
       - run: chmod +x gradlew
 
-      - run: ./gradlew assembleRelease --no-daemon
+      - name: Build
+        run: ./gradlew assembleRelease --no-daemon
+        env:
+          APP_VERSION: ${{ github.ref_name }}
+          APP_VERSION_CODE: ${{ github.run_number }}
 
       - name: Sign APK
         run: |

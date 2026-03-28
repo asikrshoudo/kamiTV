@@ -4,6 +4,9 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
+val appVersionName = System.getenv("APP_VERSION") ?: "1.0.0"
+val appVersionCode = System.getenv("APP_VERSION_CODE")?.toIntOrNull() ?: 1
+
 android {
     namespace = "com.thekami.kamitv"
     compileSdk = 34
@@ -12,8 +15,8 @@ android {
         applicationId = "com.thekami.kamitv"
         minSdk = 21
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
     }
 
     buildTypes {
