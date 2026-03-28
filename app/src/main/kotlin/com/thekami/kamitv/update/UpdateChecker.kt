@@ -12,8 +12,7 @@ data class UpdateInfo(
 )
 
 object UpdateChecker {
-    // TODO: change to your actual GitHub repo
-    private const val REPO = "thekami-dev/kamiTV"
+    private const val REPO = "asikrshoudo/kamiTV"
     private const val API = "https://api.github.com/repos/$REPO/releases/latest"
 
     suspend fun check(currentVersion: String): UpdateInfo? = withContext(Dispatchers.IO) {
