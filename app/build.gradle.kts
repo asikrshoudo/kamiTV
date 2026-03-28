@@ -72,4 +72,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.google.zxing:core:3.5.3")
+    implementation("androidx.appcompat:appcompat:1.6.1")
 }
+// appcompat — already handled above, just add to dependencies
