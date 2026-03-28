@@ -34,13 +34,15 @@ jobs:
       - name: Sign APK
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > kamitv.jks
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
-            -keystore kamitv.jks \
-            -storepass ${{ secrets.KEY_PASSWORD }} \
-            -keypass ${{ secrets.KEY_PASSWORD }} \
-            app/build/outputs/apk/release/app-release-unsigned.apk \
-            ${{ secrets.KEY_ALIAS }}
-          mv app/build/outputs/apk/release/app-release-unsigned.apk kamiTV-${GITHUB_REF_NAME}.apk
+          APKSIGNER=$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner
+          ZIPALIGN=$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/zipalign
+          $ZIPALIGN -v 4 app/build/outputs/apk/release/app-release-unsigned.apk aligned.apk
+          $APKSIGNER sign --ks kamitv.jks \
+            --ks-pass pass:${{ secrets.KEY_PASSWORD }} \
+            --key-pass pass:${{ secrets.KEY_PASSWORD }} \
+            --ks-key-alias ${{ secrets.KEY_ALIAS }} \
+            --out kamiTV-${GITHUB_REF_NAME}.apk \
+            aligned.apk
 
       - uses: softprops/action-gh-release@v2
         with:
